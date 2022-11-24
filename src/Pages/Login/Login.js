@@ -34,12 +34,13 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                toast('Login successfull');
-                // navigate(from, { replace: true });
+                toast.success('Login successfull');
+                navigate(from, { replace: true });
             })
             .catch(error => {
                 console.error(error);
                 setError(error.message);
+                toast.error('Wrong username or password');
             })
             .finally(() => {
                 setLoading(false);
@@ -75,7 +76,7 @@ const Login = () => {
 
                             <div className="form-control">
 
-                                <input type="text" name='email' placeholder="email" className="input w-full bg-white border-primary" />
+                                <input type="email" name='email' placeholder="email" className="input w-full bg-white border-primary" />
                             </div>
                             <div className="form-control">
 

@@ -24,13 +24,13 @@ const Navbar = () => {
                 <>
                     <li className='font-bold text-white'><Link to='/dashboard'>Dashboard</Link></li>
                     <li className='font-bold text-white'>
-                        <button onClick={handleLogOut} className='btn bg-transparent border-white border-2 px-4 btn-login hover:bg-info hover:border-info'>Sign Out</button>
+                        <button onClick={handleLogOut} className='btn bg-transparent border-white border-2 px-4 text-white hover:bg-info hover:border-info rounded-md'>Sign Out</button>
                     </li>
                 </>
                 :
                 <li className='font-bold'>
                     <Link to='/login'>
-                        <button className="btn bg-transparent border-white border-2 px-4 btn-login text-white hover:bg-info hover:border-info">Login</button>
+                        <button className="btn bg-transparent border-white border-2 px-4 text-white hover:bg-info hover:border-info">Login</button>
                     </Link>
                 </li>
         }
