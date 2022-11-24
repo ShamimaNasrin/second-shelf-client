@@ -5,8 +5,8 @@ const Contact = () => {
         <div className='p-6'>
             <div className='bg-secondary rounded-lg p-6 lg:m-24 md:m-16 sm:m-9 m-5 flex flex-col sm:flex-col md:flex-row lg:flex-row justify-center items-center'>
 
-                <div className='mt-6 sm:mt-6 md:mt-0 lg:mt-0 flex justify-center items-center md:w-1/2 lg:w-2/5 card w-full max-w-md shadow-2xl bg-base-100 py-12'>
-                    <form className='w-11/12 sm:w-11/12 md:w-11/12 lg:w-11/12 p-0 sm:p-1 md:p-4 lg:p-7'>
+                <div className='mt-6 sm:mt-6 md:mt-0 lg:mt-0 flex justify-center items-center md:w-1/2 lg:w-2/5 card w-full max-w-md shadow-2xl bg-base-100 py-10'>
+                    <form className='w-11/12 sm:w-11/12 md:w-11/12 lg:w-11/12 p-0 sm:px-1 md:px-2 lg:px-3'>
                         <h2 className="text-4xl font-bold mb-6">Contact</h2>
 
                         <div className='grid grid-cols-1 gap-4'>
