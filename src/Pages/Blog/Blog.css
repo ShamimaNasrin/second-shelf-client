@@ -1,0 +1,8 @@
+
+  /* Responsiveness for mobile & tab*/
+  @media screen and (max-width:689px) {
+    .blog-card{
+        width: 85%;
+    }
+
+  }
