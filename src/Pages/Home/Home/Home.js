@@ -3,6 +3,7 @@ import Advertise from '../Advertise/Advertise';
 import Banner from '../Banner/Banner';
 import Categories from '../Categories/Categories';
 import Contact from '../Contact/Contact';
+import TrendingItems from '../TrendingItems/TrendingItems';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <Banner></Banner>
             <Categories></Categories>
             <Advertise></Advertise>
+            <TrendingItems></TrendingItems>
             <Contact></Contact>
         </div>
     );

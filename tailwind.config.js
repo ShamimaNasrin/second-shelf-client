@@ -13,16 +13,16 @@ module.exports = {
           secondary: "#FCF8F0",
 
           accent: "#3A4256",
-          
+
           info: "#9a3412",
 
           neutral: "#3D4451",
-          
+
           other: "#A57E40",
 
           "base-100": "#FFFFFF",
 
-          "error": "#EA4034",
+          error: "#EA4034",
         }
       }
     ]
