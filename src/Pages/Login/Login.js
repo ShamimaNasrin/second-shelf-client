@@ -5,11 +5,14 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../Hooks/useTitle';
+import useToken from '../../Hooks/useToken';
 import loginImg from '../../images/login.png';
 
 const Login = () => {
     const { signIn, loading, setLoading, providerLoginGoogle } = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -20,6 +23,10 @@ const Login = () => {
         window.scrollTo(0, 0);
     }, []);
     useTitle('Login');
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -35,7 +42,8 @@ const Login = () => {
                 form.reset();
                 setError('');
                 toast.success('Login successfull');
-                navigate(from, { replace: true });
+                setLoginUserEmail(email);
+
             })
             .catch(error => {
                 console.error(error);

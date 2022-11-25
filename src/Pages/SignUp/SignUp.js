@@ -3,15 +3,22 @@ import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../Hooks/useTitle';
+import useToken from '../../Hooks/useToken';
 import signupImg from '../../images/sign-up.png';
 
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const [error, setError] = useState('');
+    const [signUpUserEmail, setSignUpUserEmail] = useState('')
+    const [token] = useToken(signUpUserEmail);
 
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     //scrolltop
     useEffect(() => {
@@ -58,8 +65,6 @@ const SignUp = () => {
     }
 
 
-
-
     //send user data to database
     const saveUserToDB = (name, email, userRole) => {
         const user = { name, email, userRole };
@@ -73,22 +78,10 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 //console.log('saved user details:', data);
-                getUserJwtToken(email);
+                setSignUpUserEmail(email);
             })
     }
 
-     //receive token
-     const getUserJwtToken = (email) => {
-        fetch(`http://localhost:5000/jwt?email=${email}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.accessToken) {
-                    console.log('token', data.accessToken);
-                    localStorage.setItem('accessToken', data.accessToken);
-                    navigate(from, { replace: true });
-                }
-            })
-    }
 
     return (
         <div>
