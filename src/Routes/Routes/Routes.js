@@ -9,12 +9,17 @@ import errorImg from "../../images/error-img.png";
 import Category from "../../Pages/Category/Category";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import DashboardLayout from "../../Layout/DashboardLayout";
-import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
-import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
-import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
-import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
-import ReportedItems from "../../Pages/Dashboard/ReportedItems/ReportedItems";
+
 import AdminRoute from "../AdminRoute/AdminRoute";
+import MyOrders from "../../Pages/Dashboard/BuyerPages/MyOrders";
+import MyProducts from "../../Pages/Dashboard/SellerPages/MyProducts";
+import AllSellers from "../../Pages/Dashboard/AdminPages/AllSellers";
+import AllBuyers from "../../Pages/Dashboard/AdminPages/AllBuyers";
+import ReportedItems from "../../Pages/Dashboard/AdminPages/ReportedItems";
+import DashboardDefault from "../../Pages/Dashboard/DashboardDefault";
+import AddProduct from "../../Pages/Dashboard/SellerPages/AddProduct";
+import MyBuyers from "../../Pages/Dashboard/SellerPages/MyBuyers";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 
 const router = createBrowserRouter([
@@ -54,13 +59,26 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
+
             {
                 path: '/dashboard',
+                element: <DashboardDefault></DashboardDefault>
+            },
+            {
+                path: '/dashboard/myorders',
                 element: <MyOrders></MyOrders>
             },
             {
+                path: '/dashboard/addproduct',
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
+            },
+            {
                 path: '/dashboard/myproducts',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
+            },
+            {
+                path: '/dashboard/mybuyers',
+                element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
             },
             {
                 path: '/dashboard/allsellers',
