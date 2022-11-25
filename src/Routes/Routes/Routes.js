@@ -8,6 +8,9 @@ import SignUp from "../../Pages/SignUp/SignUp";
 import errorImg from "../../images/error-img.png";
 import Category from "../../Pages/Category/Category";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import DashboardLayout from "../../Layout/DashboardLayout";
+import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
+import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 
 
 const router = createBrowserRouter([
@@ -40,6 +43,22 @@ const router = createBrowserRouter([
                 element: <PrivateRoute><Category></Category></PrivateRoute>,
                 // loader: ({params}) => fetch(`/${params.catName}`)
             }
+        ]
+    },
+
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children: [
+            {
+                path: '/dashboard',
+                element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/adddoctor',
+                element: <MyProducts></MyProducts>
+            },
+
         ]
     },
 

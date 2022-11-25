@@ -40,10 +40,10 @@ const Navbar = () => {
         <div className="navbar bg-primary px-5 py-5">
             <div className="navbar-start">
                 <div className="dropdown">
-                    <label tabIndex={0} className="btn bg-transparent border-0 lg:hidden btn-toogle">
+                    <label tabIndex={0} className="btn bg-transparent border-0 lg:hidden btn-toogle text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
-                    <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary">
+                    <ul tabIndex={1} className="menu menu-compact dropdown-content mt-3 p-2 shadow rounded-box w-52 bg-primary">
                         {menuItems}
                     </ul>
                 </div>
@@ -60,6 +60,11 @@ const Navbar = () => {
                     {menuItems}
                 </ul>
             </div>
+
+            {/* dashboard toggle btn for responsiveness */}
+            <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden navbar-end text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
 
         </div>
     );

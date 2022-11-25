@@ -18,6 +18,8 @@ module.exports = {
 
           neutral: "#3D4451",
 
+          sidebar: "#dcc7a6",
+
           other: "#A57E40",
 
           "base-100": "#FFFFFF",
