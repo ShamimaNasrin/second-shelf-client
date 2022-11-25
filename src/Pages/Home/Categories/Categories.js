@@ -2,22 +2,23 @@ import React from 'react';
 import kids from '../../../images/cat-icons/kids.png';
 import business from '../../../images/cat-icons/business.png';
 import literature from '../../../images/cat-icons/literature.png';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
     const cardData = [
         {
             id: 1,
-            title: 'Children',
+            catName: 'Children',
             icon: kids,
         },
         {
             id: 2,
-            title: 'Business',
+            catName: 'Business',
             icon: business,
         },
         {
             id: 3,
-            title: 'Literature',
+            catName: 'Literature',
             icon: literature,
         },
 
@@ -31,10 +32,12 @@ const Categories = () => {
                 {
                     cardData.map(card => <div
                         key={card.id} className="mx-auto flex justify-center">
+                        <Link to={`/category/${card.catName}`}>
                         <div className=' bg-secondary flex flex-col items-center justify-center px-10 py-4 rounded-md'>
                             <figure className='w-[80px]'><img src={card.icon} alt="Album" /></figure>
-                            <p className='font-bold text-center text-xl'>{card.title}</p>
+                            <p className='font-bold text-center text-xl'>{card.catName}</p>
                         </div>
+                        </Link>
                     </div>)
                 }
             </div>

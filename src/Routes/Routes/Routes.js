@@ -6,6 +6,8 @@ import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
 import SignUp from "../../Pages/SignUp/SignUp";
 import errorImg from "../../images/error-img.png";
+import Category from "../../Pages/Category/Category";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -33,6 +35,11 @@ const router = createBrowserRouter([
                 path: '/aboutt',
                 element: <About></About>
             },
+            {
+                path: '/category/:catName',
+                element: <PrivateRoute><Category></Category></PrivateRoute>,
+                // loader: ({params}) => fetch(`/${params.catName}`)
+            }
         ]
     },
 
