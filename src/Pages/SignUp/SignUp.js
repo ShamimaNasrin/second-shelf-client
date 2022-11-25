@@ -73,10 +73,22 @@ const SignUp = () => {
             .then(res => res.json())
             .then(data => {
                 //console.log('saved user details:', data);
-                navigate('/');
+                getUserJwtToken(email);
             })
     }
 
+     //receive token
+     const getUserJwtToken = (email) => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    console.log('token', data.accessToken);
+                    localStorage.setItem('accessToken', data.accessToken);
+                    navigate(from, { replace: true });
+                }
+            })
+    }
 
     return (
         <div>
