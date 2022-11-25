@@ -21,7 +21,11 @@ const CategoryCard = () => {
                     <p className='pb-0 text-sm'>Post on: 1 nov</p>
                     <p className='pb-0 text-sm'>Seller: harry</p>
                     <div className="card-actions justify-end">
-                        <CustomBtn>Book now</CustomBtn>
+                        <label
+                            htmlFor="booking-modal"
+                            className="btn btn-primary bg-primary text-white border-none"
+
+                        >Book now</label>
                     </div>
                 </div>
             </div>
