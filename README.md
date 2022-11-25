@@ -3,6 +3,11 @@
 
 ## Live preview: 
 
+## Admin:
+- UserName: Shamima
+- Email: shamima@gmail.com
+- Password: 123456
+
 
 ### Project overview
 - A functional full stack web app 

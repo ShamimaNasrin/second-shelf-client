@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 import useTitle from '../../Hooks/useTitle';
 import signupImg from '../../images/sign-up.png';
@@ -8,7 +8,10 @@ import signupImg from '../../images/sign-up.png';
 const SignUp = () => {
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const [error, setError] = useState('');
+
+    const location = useLocation();
     const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
 
     //scrolltop
     useEffect(() => {
@@ -25,17 +28,27 @@ const SignUp = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, photoURL, email, password);
+        const userRole = form.userRole.value;
+        //console.log(name, photoURL, email, password, userRole);
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                form.reset();
+                //console.log(user);
                 setError('');
+                form.reset();
                 toast.success('Signup successfull');
-                handleUpdateUserProfile(name, photoURL);
-                navigate('/');
+
+                const profile = {
+                    displayName: name,
+                    photoURL: photoURL
+                }
+                updateUserProfile(profile)
+                    .then(() => {
+                        saveUserToDB(name, email, userRole);
+                    })
+                    .catch(error => console.error(error));
+
             })
             .catch(err => {
                 console.error(err);
@@ -44,15 +57,24 @@ const SignUp = () => {
             });
     }
 
-    //to get userName and Photo
-    const handleUpdateUserProfile = (name, photoURL) => {
-        const profile = {
-            displayName: name,
-            photoURL: photoURL
-        }
-        updateUserProfile(profile)
-            .then(() => { })
-            .catch(error => console.error(error));
+
+
+
+    //send user data to database
+    const saveUserToDB = (name, email, userRole) => {
+        const user = { name, email, userRole };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                //console.log('saved user details:', data);
+                navigate('/');
+            })
     }
 
 
@@ -71,20 +93,25 @@ const SignUp = () => {
                         <div className='grid grid-cols-1 gap-4'>
 
                             <div className="form-control">
-
                                 <input type="text" name='name' placeholder="Your Name" className="input w-full bg-white border-primary" required />
                             </div>
-                            <div className="form-control">
 
+                            <div className="form-control">
                                 <input type="text" name='photoURL' placeholder="photo url" className="input w-full bg-white border-primary" />
                             </div>
 
                             <div className="form-control">
-
                                 <input type="email" name='email' placeholder="email" className="input w-full bg-white border-primary" required />
                             </div>
-                            <div className="form-control">
 
+                            <div className="form-control">
+                                <select name='userRole' className="select w-full bg-white border-primary">
+                                    <option>Buyer</option>
+                                    <option>Seller</option>
+                                </select>
+                            </div>
+
+                            <div className="form-control">
                                 <input type="password" name='password' placeholder="password" className="input w-full bg-white border-primary" required />
                             </div>
 
