@@ -18,7 +18,10 @@ const AllSellers = () => {
     const handleVerifiedSeller = id => {
         //console.log(id);
         fetch(`http://localhost:5000/sellers/verified/${id}`, {
-            method: 'PUT'
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
         })
             .then(res => res.json())
             .then(data => {
