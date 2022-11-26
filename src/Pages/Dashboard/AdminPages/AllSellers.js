@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const AllSellers = () => {
 
@@ -15,7 +16,18 @@ const AllSellers = () => {
 
     //Verify a Seller handler
     const handleVerifiedSeller = id => {
-        console.log(id);
+        //console.log(id);
+        fetch(`http://localhost:5000/sellers/verified/${id}`, {
+            method: 'PUT'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success('Seller verified')
+                    refetch();
+                }
+            })
     }
 
     return (
@@ -38,7 +50,7 @@ const AllSellers = () => {
                                 <th>{i + 1}</th>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
-                                <td>{<button onClick={() => handleVerifiedSeller(seller._id)} className='btn btn-xs btn-primary'>Verify Seller</button>}</td>
+                                <td>{seller?.sellerType !== 'verified' && <button onClick={() => handleVerifiedSeller(seller._id)} className='btn btn-xs btn-primary'>Verify Seller</button>}</td>
                                 <td><button className='btn btn-xs btn-danger text-white p-4 text-center'>Delete</button></td>
                             </tr>)
                         }
