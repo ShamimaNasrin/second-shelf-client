@@ -1,18 +1,74 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
+    //todays date
     const current = new Date();
     const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const handleAddProduct = data => {
-        console.log(data);
-    }
+        //console.log(data);
 
+        //upload img to imgBB
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=99c331b71834a99f52c624a3733c73cb`
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgData => {
+                //console.log(imgData);
+                if (imgData.success) {
+                    //console.log(imgData.data.url);
+
+                    //send Book info to server
+                    const Book = {
+                        name: data.name,
+                        phone: data.phone,
+                        bookName: data.bookName,
+                        author: data.author,
+                        category: data.category,
+                        condition: data.condition,
+                        description: data.description,
+                        buyingPrice: data.buyingP,
+                        resalePrice: data.resaleP,
+                        yearsOfUse: data.useYear,
+                        postDate: data.postDate,
+                        location: data.location,
+                        image: imgData.data.url
+                    }
+
+                    console.log(Book);
+
+                    fetch('http://localhost:5000/books', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(Book)
+                    })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log(result);
+                            toast.success('Book added successfully');
+                            navigate('/dashboard/myproducts')
+                        })
+
+                }
+
+            })
+    }
 
     return (
         <div className='w-96 p-7'>
@@ -80,7 +136,7 @@ const AddProduct = () => {
                 {/* Description */}
                 <div className="form-control w-full max-w-xs">
                     <label className="label"> <span className="label-text">Description</span></label>
-                    <input type="text" {...register("description", {
+                    <textarea type="text" {...register("description", {
                         required: "Description Required"
                     })} className="input input-bordered w-full max-w-xs" />
                     {errors.description && <p className='text-red-500'>{errors.description.message}</p>}
@@ -95,13 +151,13 @@ const AddProduct = () => {
                     {errors.buyingP && <p className='text-red-500'>{errors.buyingP.message}</p>}
                 </div>
 
-                {/* Price */}
+                {/* Resale Price */}
                 <div className="form-control w-full max-w-xs">
-                    <label className="label"> <span className="label-text">Price</span></label>
-                    <input type="number" {...register("price", {
+                    <label className="label"> <span className="label-text">Resale Price</span></label>
+                    <input type="number" {...register("resaleP", {
                         required: "Price Required"
                     })} className="input input-bordered w-full max-w-xs" />
-                    {errors.price && <p className='text-red-500'>{errors.price.message}</p>}
+                    {errors.resaleP && <p className='text-red-500'>{errors.resaleP.message}</p>}
                 </div>
 
                 {/* Years of use */}
@@ -135,7 +191,7 @@ const AddProduct = () => {
                     <input type="file" {...register("image", {
                         required: "Photo is Required"
                     })} className="input input-bordered w-full max-w-xs" />
-                    {errors.img && <p className='text-red-500'>{errors.img.message}</p>}
+                    {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                 </div>
 
                 <input className='btn btn-accent w-1/2 block mx-auto mt-4 bg-primary text-white border-none' value="Add Product" type="submit" />
