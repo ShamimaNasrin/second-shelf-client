@@ -17,7 +17,7 @@ const ItemBookModal = ({ book, setABook }) => {
         const location = form.location.value;
         const itemName = form.itemName.value;
         const itemPrice = form.itemPrice.value;
-        console.log(userName, email, phone, itemName, itemPrice, location);
+        //console.log(userName, email, phone, itemName, itemPrice, location);
 
 
         const booking = {
@@ -44,7 +44,7 @@ const ItemBookModal = ({ book, setABook }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 if (data.acknowledged) {
                     setABook(null);
                     toast.success('Booking confirmed');
