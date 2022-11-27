@@ -21,7 +21,9 @@ const Payment = () => {
             {/* call the checkoutform */}
             <div className='w-96 my-12'>
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm></CheckoutForm>
+                    <CheckoutForm
+                    item={item}
+                    ></CheckoutForm>
                 </Elements>
             </div>
         </div>
