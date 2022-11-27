@@ -2,7 +2,7 @@ import React from 'react';
 import CustomBtn from '../../components/CustomBtn/CustomBtn';
 import './CategoryCss.css';
 
-const CategoryCard = ({ book }) => {
+const CategoryCard = ({ book, setABook }) => {
     const { image, author, bookName, buyingPrice, category, resalePrice, location, yearsOfUse, postDate, name, email } = book;
     return (
         <div className='lg:w-3/5 md:w-3/4'>
@@ -21,15 +21,20 @@ const CategoryCard = ({ book }) => {
                     <p className='pb-0 text-sm'>Years of use: {yearsOfUse}</p>
                     <p className='pb-0 text-sm'>Post on: {postDate}</p>
                     <p className='pb-0 text-sm'>Seller: {name}</p>
+
+                     {/* The button to open modal */}
                     <div className="card-actions justify-end">
                         <label
                             htmlFor="booking-modal"
                             className="btn btn-primary bg-primary text-white border-none"
-
-                        >Book now</label>
+                            onClick={() => setABook(book)}
+                        >Book now</label>    
                     </div>
+
                 </div>
             </div>
+
+            
         </div>
     );
 };

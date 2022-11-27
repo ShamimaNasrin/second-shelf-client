@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
-const ItemBookModal = () => {
+const ItemBookModal = ({ book, setABook }) => {
     const { user } = useContext(AuthContext);
     //console.log(user.displayName);
+    const { bookName, image, resalePrice, author } = book;
+
+
     const handleBooking = e => {
         e.preventDefault();
         const form = e.target;
@@ -15,6 +19,43 @@ const ItemBookModal = () => {
         const itemPrice = form.itemPrice.value;
         console.log(userName, email, phone, itemName, itemPrice, location);
 
+
+        const booking = {
+            bookName,
+            image,
+            resalePrice,
+            author,
+            buyerName: userName,
+            buyerEmail: email,
+            buyerPhone: phone,
+            meetLocation: location
+
+        }
+        //console.log(booking);
+
+        //send booking data to server
+        fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    setABook(null);
+                    toast.success('Booking confirmed');
+                    form.reset();
+                }
+                //if booking failed
+                else {
+                    toast.error(data.message);
+                }
+            })
+
     }
     return (
         <div>
@@ -23,7 +64,7 @@ const ItemBookModal = () => {
             <div className="modal">
                 <div className="modal-box relative">
                     <label htmlFor="booking-modal" className="btn btn-sm bg-secondary border-none btn-circle absolute right-2 top-2 text-white hover:bg-primary">✕</label>
-                    <h3 className="text-lg font-bold mb-9">Item name</h3>
+                    <h3 className="text-lg font-bold mb-9">{bookName}</h3>
 
                     <form onSubmit={handleBooking}>
 
@@ -35,11 +76,11 @@ const ItemBookModal = () => {
                         </div>
 
                         <div className="form-control mt-4">
-                            <input type="text" name='itemName' defaultValue='itemName' className="input w-full bg-secondary" readOnly />
+                            <input type="text" name='itemName' defaultValue={bookName} className="input w-full bg-secondary" readOnly />
                         </div>
 
                         <div className="form-control mt-4">
-                            <input type="text" name='itemPrice' defaultValue='itemPrice' className="input w-full bg-secondary" readOnly />
+                            <input type="text" name='itemPrice' defaultValue={resalePrice} className="input w-full bg-secondary" readOnly />
                         </div>
 
                         <div className="form-control mt-4">

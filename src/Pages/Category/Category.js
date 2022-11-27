@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import useTitle from '../../Hooks/useTitle';
 import CategoryCard from './CategoryCard';
@@ -7,7 +7,8 @@ import ItemBookModal from './ItemBookModal';
 
 const Category = () => {
     const allBooks = useLoaderData();
-    console.log(allBooks);
+    // console.log(allBooks);
+    const [abook, setABook] = useState(null);
 
     //scrolltop
     useEffect(() => {
@@ -22,16 +23,18 @@ const Category = () => {
                 {
                     allBooks.map((book) => <CategoryCard
                         key={book._id}
-                        book={book}></CategoryCard>)
+                        book={book}
+                        setABook={setABook}>
+                    </CategoryCard>)
                 }
             </div>
-
             {
-                <ItemBookModal>
-
+                abook &&
+                <ItemBookModal
+                    book={abook}
+                    setABook={setABook}>
                 </ItemBookModal>
             }
-
         </section>
     );
 };
