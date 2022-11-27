@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 import DeleteConfirmModal from '../DeleteConfirmModal/DeleteConfirmModal';
@@ -67,7 +68,18 @@ const MyOrders = () => {
                                 <td>{item.resalePrice}</td>
 
                                 <td>
-                                    {item.advertise ? <span>Paid</span> : <button onClick={() => handlePay(item._id)} className='btn btn-xs btn-primary'>Pay</button>}
+                                {
+                                        item.resalePrice && !item.paid && <Link
+                                            to={`/dashboard/payment/${item._id}`}
+                                        >
+                                            <button
+                                                className='btn btn-primary btn-sm text-white'
+                                            >Pay</button>
+                                        </Link>
+                                    }
+                                    {
+                                        item.resalePrice && item.paid && <span className='text-green-500'>Paid</span>
+                                    }
                                 </td>
                                 <td>
                                     <label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Remove</label>

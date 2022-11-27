@@ -20,6 +20,7 @@ import DashboardDefault from "../../Pages/Dashboard/DashboardDefault";
 import AddProduct from "../../Pages/Dashboard/SellerPages/AddProduct";
 import MyBuyers from "../../Pages/Dashboard/SellerPages/MyBuyers";
 import SellerRoute from "../SellerRoute/SellerRoute";
+import Payment from "../../Pages/Dashboard/Payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+            },
+            {
+                path: '/dashboard/payment/:id',
+                element: <Payment></Payment>,
+                loader: ({params}) => fetch(`http://localhost:5000/bookeditems/${params.id}`)
             },
 
         ]
