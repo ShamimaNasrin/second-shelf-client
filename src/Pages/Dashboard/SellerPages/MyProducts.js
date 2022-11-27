@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const MyProducts = () => {
 
@@ -22,6 +23,25 @@ const MyProducts = () => {
             }
         }
     })
+
+    //Advertise a Book
+    const handleAdvertise = id => {
+        //console.log(id);
+        fetch(`http://localhost:5000/books/advertise/${id}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount > 0) {
+                    toast.success('Book add to advertise')
+                    refetch();
+                }
+            })
+    }
 
     return (
         <div>
@@ -49,7 +69,7 @@ const MyProducts = () => {
                                     <label className="btn btn-sm text-white">Available</label>
                                 </td>
                                 <td>
-                                    <label className="btn btn-sm text-white">Advertise</label>
+                                    {book.advertise ? <span>advertised</span> : <button onClick={() => handleAdvertise(book._id)} className='btn btn-xs btn-primary'>Advertise it</button>}
                                 </td>
                                 <td>
                                     <label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label>
