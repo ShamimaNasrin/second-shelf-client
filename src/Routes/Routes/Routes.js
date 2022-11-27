@@ -50,7 +50,8 @@ const router = createBrowserRouter([
             {
                 path: '/category/:catName',
                 element: <PrivateRoute><Category></Category></PrivateRoute>,
-                // loader: ({params}) => fetch(`/${params.catName}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/bookscatgory/${params.catName}`)
+
             }
         ]
     },
