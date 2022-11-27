@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
+import Loading from '../../Shared/Loading/Loading';
+import DeleteConfirmModal from '../DeleteConfirmModal/DeleteConfirmModal';
 
 const ReportedItems = () => {
-
+    const [deleteItem, setDeleteItem] = useState(null);
 
     //load all items
     const { data: items = [], isLoading, refetch } = useQuery({
@@ -13,6 +16,33 @@ const ReportedItems = () => {
             return data;
         }
     });
+
+    //modal functions
+    const closeModal = () => {
+        setDeleteItem(null);
+    }
+
+    //delete reported item
+    const handleItemDelete = item => {
+        fetch(`http://localhost:5000/reportitems/${item._id}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.deletedCount > 0) {
+                    refetch();
+                    toast.success(`item deleted successfully`)
+                }
+            })
+    }
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
 
 
     return (
@@ -36,7 +66,8 @@ const ReportedItems = () => {
                                 <td>{item.bookName}</td>
                                 <td>{item.personName}</td>
                                 <td>{item.sellerName}</td>
-                                <td><label htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label></td>
+                                <td><label onClick={() => setDeleteItem(item)}
+                                    htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label></td>
                             </tr>)
                         }
 
@@ -44,17 +75,18 @@ const ReportedItems = () => {
                 </table>
             </div>
 
-            {/* {
-                deleteUser && <DeleteConfirmModal
-                    title={`Delete this item?`}
-                    message={`If you delete ${deleteUser.name}. It cannot be restore`}
+
+            {
+                deleteItem && <DeleteConfirmModal
+                    title={`Are you sure you want to delete this reported item`}
+                    message={`If you delete It cannot be restore`}
                     successButtonName="Delete"
-                    successAction={handleUserDelete}
-                    modalData={deleteUser}
+                    successAction={handleItemDelete}
+                    modalData={deleteItem}
                     closeModal={closeModal}
                 >
                 </DeleteConfirmModal>
-            } */}
+            }
         </div>
     );
 };
