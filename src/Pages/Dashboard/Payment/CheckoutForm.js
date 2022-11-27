@@ -4,13 +4,17 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 const CheckoutForm = ({ item }) => {
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState("");
+    const [success, setSuccess] = useState('');
+    const [processing, setProcessing] = useState(false);
+    const [transactionId, setTransactionId] = useState('');
+
     const { resalePrice, buyerEmail, buyerName } = item;
 
 
     //stripe hooks
     const stripe = useStripe();
     const elements = useElements();
-    
+
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
@@ -49,6 +53,35 @@ const CheckoutForm = ({ item }) => {
         else {
             setCardError('');
         }
+
+        setSuccess('');
+        setProcessing(true);
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: buyerName,
+                        email: buyerEmail
+                    },
+                },
+            },
+        );
+
+        if (confirmError) {
+            setCardError(confirmError.message);
+            return;
+        }
+
+        if (paymentIntent.status === "succeeded") {
+            setSuccess('Payment completed');
+            setTransactionId(paymentIntent.id);
+        }
+        setProcessing(false);
+
+
+
     }
 
     return (
@@ -70,19 +103,23 @@ const CheckoutForm = ({ item }) => {
                         },
                     }}
                 />
-                
-                <button 
-                className='btn btn-sm mt-4 btn-primary text-white' 
-                type="submit" 
-                disabled={!stripe || !clientSecret}>
+
+                <button
+                    className='btn btn-sm mt-4 btn-primary'
+                    type="submit"
+                    disabled={!stripe || !clientSecret || processing}>
                     Pay
                 </button>
-
 
             </form>
 
             <p className="text-red-500 mt-4">{cardError}</p>
-  
+            {
+                success && <div>
+                    <p className='text-green-500'>{success}</p>
+                    <p>Your transactionId is: <span className='font-bold'>{transactionId}</span></p>
+                </div>
+            }
         </div>
     );
 };
