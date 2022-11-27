@@ -34,6 +34,7 @@ const AddProduct = () => {
                     //send Book info to server
                     const Book = {
                         name: data.name,
+                        email: data.email,
                         phone: data.phone,
                         bookName: data.bookName,
                         author: data.author,
@@ -80,6 +81,12 @@ const AddProduct = () => {
                     <label className="label"> <span className="label-text">Name</span></label>
                     <input type="text" defaultValue={user?.displayName} {...register("name")} className="input input-bordered w-full max-w-xs" readOnly />
                     {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+                </div>
+
+                {/* seller email */}
+                <div className="form-control w-full max-w-xs">
+                    <label className="label"> <span className="label-text">Email</span></label>
+                    <input type="email" defaultValue={user?.email} {...register("email")} className="input input-bordered w-full max-w-xs" readOnly />
                 </div>
 
                 {/* seller phone */}

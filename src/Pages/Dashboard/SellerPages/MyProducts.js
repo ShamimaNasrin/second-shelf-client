@@ -1,18 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import Loading from '../../Shared/Loading/Loading';
 import DeleteConfirmModal from '../DeleteConfirmModal/DeleteConfirmModal';
 
 const MyProducts = () => {
     const [deleteBook, setDeleteBook] = useState(null);
+    const { user } = useContext(AuthContext);
 
+    //get books acording to seller
     const { data: books, isLoading, refetch } = useQuery({
-        queryKey: ['books'],
+        queryKey: ['books', user?.email],
         queryFn: async () => {
 
             try {
-                const res = await fetch('http://localhost:5000/books', {
+                const res = await fetch(`http://localhost:5000/books?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -26,6 +29,7 @@ const MyProducts = () => {
             }
         }
     })
+
 
     //Advertise a Book
     const handleAdvertise = id => {
