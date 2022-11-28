@@ -12,31 +12,31 @@ const TrendingItems = () => {
             id: 1,
             title: 'The Godfather',
             author: 'Mario Puzo',
-            icon: img1,
+            bookCover: img1,
         },
         {
             id: 2,
             title: 'The Hobbit',
             author: 'J.R.R. Tolkien',
-            icon: img2,
+            bookCover: img2,
         },
         {
             id: 3,
             title: 'The Lord of the Rings',
             author: 'J.R.R. Tolkien',
-            icon: img3,
+            bookCover: img3,
         },
         {
             id: 4,
             title: 'A Tale of Two Cities',
             author: 'Charles Dickens',
-            icon: img4,
+            bookCover: img4,
         },
         {
             id: 5,
             title: 'Da Vinci Code',
             author: 'Dan Brown',
-            icon: img5,
+            bookCover: img5,
         },
 
     ]

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import Loading from '../../Shared/Loading/Loading';
 import DeleteConfirmModal from '../DeleteConfirmModal/DeleteConfirmModal';
+import { IoIosCheckmarkCircle } from "react-icons/io";
 
 const AllSellers = () => {
     const [deleteUser, setDeleteUser] = useState(null);
@@ -65,7 +66,7 @@ const AllSellers = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">All Sellers</h2>
+            <h2 className="text-3xl font-extrabold text-center my-10">All Sellers</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -83,7 +84,9 @@ const AllSellers = () => {
                                 <th>{i + 1}</th>
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
-                                <td>{seller?.sellerType !== 'verified' && <button onClick={() => handleVerifiedSeller(seller._id)} className='btn btn-xs btn-primary'>Verify Seller</button>}</td>
+                                <td>{seller?.sellerType !== 'verified' ? <button onClick={() => handleVerifiedSeller(seller._id)} className='btn px-2 py-0 btn-primary text-white'>Verify Seller</button>
+                                    : <IoIosCheckmarkCircle className='mx-1 text-cyan-400 text-3xl' />}</td>
+
                                 <td><label onClick={() => setDeleteUser(seller)} htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label></td>
                             </tr>)
                         }

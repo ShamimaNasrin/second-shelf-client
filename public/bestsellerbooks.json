@@ -1,0 +1,22 @@
+[
+    {
+        "title": "The Philosopher's Stone",
+        "author": "by J.K. Rowling",
+        "bookCover": "https://i.ibb.co/7bmh332/hpOne.jpg"
+    },
+    {
+        "title": "The Chamber of Secrets",
+        "author": "by J.K. Rowling",
+        "bookCover": "https://i.ibb.co/JKnPGGV/hpTwo.jpg"
+    },
+    {
+        "title": "The Prisoner of Azkaban",
+        "author": "by J.K. Rowling",
+        "bookCover": "https://i.ibb.co/0fL8x8d/hpThree.jpg"
+    },
+    {
+        "title": "The Goblet of Fire",
+        "author": "by J.K. Rowling",
+        "bookCover": "https://i.ibb.co/TbRgx3S/hpFour.jpg"
+    }
+]

@@ -110,7 +110,7 @@ const CheckoutForm = ({ item }) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit} className='shadow-xl p-6 bg-white rounded-md m-6'>
+            <form onSubmit={handleSubmit} className='shadow-xl p-10 bg-white rounded-md m-6'>
                 <CardElement
                     options={{
                         style: {

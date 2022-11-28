@@ -80,7 +80,7 @@ const MyProducts = () => {
 
     return (
         <div>
-            <h2 className="text-3xl">My Products</h2>
+            <h2 className="text-3xl font-extrabold text-center my-10">My Products</h2>
             <div className="overflow-x-auto">
                 <table className="table w-full">
                     <thead>
@@ -101,10 +101,19 @@ const MyProducts = () => {
                                 <td>{book.bookName}</td>
                                 <td>{book.resalePrice}</td>
                                 <td>
-                                    <label className="btn btn-sm text-white">Available</label>
+                                    {
+                                        book.paid ? <label className="text-green-500 font-semibold">Sold</label>
+                                            : <label className="font-semibold">Available</label>
+                                    }
                                 </td>
                                 <td>
-                                    {book.advertise ? <span>advertised</span> : <button onClick={() => handleAdvertise(book._id)} className='btn btn-xs btn-primary'>Advertise it</button>}
+                                    {
+                                        book.paid || <>
+                                            {
+                                                book.advertise ? <span>advertised</span> : <button onClick={() => handleAdvertise(book._id)} className='btn btn-xs btn-primary'>Advertise it</button>
+                                            }
+                                        </>
+                                    }
                                 </td>
                                 <td>
                                     <label onClick={() => setDeleteBook(book)} htmlFor="confirmation-modal" className="btn btn-sm btn-error text-white">Delete</label>

@@ -72,11 +72,13 @@ const AddProduct = () => {
     }
 
     return (
-        <div className='w-96 p-7'>
-            <h2 className="text-4xl">Add A Product</h2>
-            <form onSubmit={handleSubmit(handleAddProduct)} className='bg-white p-7 mt-4 shadow-xl rounded-lg'>
+        <div className='p-7'>
+            <h2 className="text-3xl font-extrabold text-center my-10">Add A Product</h2>
+            <form onSubmit={handleSubmit(handleAddProduct)} className='bg-white p-7 mt-4 shadow-xl rounded-lg
+            lg:w-[75%] mx-auto'>
 
-                {/* seller name */}
+                <div className="grid lg:grid-cols-2 md:grid-cols-2 justify-items-center gap-3">
+                    {/* seller name */}
                 <div className="form-control w-full max-w-xs">
                     <label className="label"> <span className="label-text">Name</span></label>
                     <input type="text" defaultValue={user?.displayName} {...register("name")} className="input input-bordered w-full max-w-xs" readOnly />
@@ -200,8 +202,9 @@ const AddProduct = () => {
                     })} className="input input-bordered w-full max-w-xs" />
                     {errors.image && <p className='text-red-500'>{errors.image.message}</p>}
                 </div>
+                </div>
 
-                <input className='btn btn-accent w-1/2 block mx-auto mt-4 bg-primary text-white border-none' value="Add Product" type="submit" />
+                <input className='btn btn-accent w-1/2 block mx-auto mt-8 bg-primary hover:bg-primary text-white border-none' value="Add Product" type="submit" />
             </form>
         </div>
     );
