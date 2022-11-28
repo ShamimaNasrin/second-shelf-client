@@ -9,7 +9,7 @@ const CheckoutForm = ({ item }) => {
     const [processing, setProcessing] = useState(false);
     const [transactionId, setTransactionId] = useState('');
 
-    const { _id, resalePrice, buyerEmail, buyerName } = item;
+    const { _id, resalePrice, buyerEmail, buyerName, bookId } = item;
 
 
     //stripe hooks
@@ -80,6 +80,7 @@ const CheckoutForm = ({ item }) => {
 
             //send the data to server
             const payment = {
+                bookId,
                 resalePrice,
                 transactionId: paymentIntent.id,
                 buyerEmail,

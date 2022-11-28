@@ -5,7 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const ItemBookModal = ({ book, setABook }) => {
     const { user } = useContext(AuthContext);
     //console.log(user.displayName);
-    const { bookName, image, resalePrice, author } = book;
+    const { bookName, image, resalePrice, author, _id } = book;
 
 
     const handleBooking = e => {
@@ -22,6 +22,7 @@ const ItemBookModal = ({ book, setABook }) => {
 
         const booking = {
             bookName,
+            bookId: _id,
             image,
             resalePrice,
             author,

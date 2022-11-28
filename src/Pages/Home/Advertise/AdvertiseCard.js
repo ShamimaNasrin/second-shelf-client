@@ -13,9 +13,9 @@ const AdvertiseCard = (book) => {
                 <div className="card-body">
                     <h2 className="card-title">{bookName}</h2>
                     <p>{author}</p>
-                    <p>{resalePrice}</p>
+                    <p>{resalePrice}$</p>
                     <p className='flex items-center'><RiStarFill className='text-yellow-300 mr-1' />4.5</p>
-                    <p className='text-red'>To buy this book check in the ${category} category</p>
+                    <p className='text-red-600 text-sm'>To buy this book check in the {category} category</p>
                 </div>
             </div>
         </div>

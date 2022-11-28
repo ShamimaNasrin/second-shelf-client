@@ -1,7 +1,7 @@
 # Second Shelf
 ## Second Shelf is an full stack web based resell bookshop. 
 
-## Live preview: 
+## Live preview: https://second-shelf-bookstore.web.app/
 
 ## Admin:
 - UserName: Shamima
