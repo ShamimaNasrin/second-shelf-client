@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import useTitle from '../../../Hooks/useTitle';
 import Advertise from '../Advertise/Advertise';
 import Banner from '../Banner/Banner';
 import BestSeller from '../BestSeller/BestSeller';
@@ -7,6 +8,13 @@ import Contact from '../Contact/Contact';
 import TrendingItems from '../TrendingItems/TrendingItems';
 
 const Home = () => {
+
+    //scrolltop
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+    useTitle('Second Shelf');
+
     return (
         <div className=''>
             <Banner></Banner>

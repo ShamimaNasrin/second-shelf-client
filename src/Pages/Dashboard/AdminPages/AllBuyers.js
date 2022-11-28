@@ -11,7 +11,7 @@ const AllBuyers = () => {
     const { data: buyers = [], isLoading, refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers');
+            const res = await fetch('https://second-shelf-server.vercel.app/buyers');
             const data = await res.json();
             return data;
         }
@@ -24,7 +24,7 @@ const AllBuyers = () => {
 
     //delete buyer
     const handleUserDelete = user => {
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://second-shelf-server.vercel.app/users/${user._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

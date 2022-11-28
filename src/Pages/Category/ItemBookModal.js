@@ -35,7 +35,7 @@ const ItemBookModal = ({ book, setABook }) => {
         //console.log(booking);
 
         //send booking data to server
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://second-shelf-server.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

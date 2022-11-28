@@ -68,7 +68,7 @@ const SignUp = () => {
     //send user data to database
     const saveUserToDB = (name, email, userRole) => {
         const user = { name, email, userRole };
-        fetch('http://localhost:5000/users', {
+        fetch('https://second-shelf-server.vercel.app/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

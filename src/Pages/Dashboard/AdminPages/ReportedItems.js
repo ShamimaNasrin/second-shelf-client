@@ -11,7 +11,7 @@ const ReportedItems = () => {
     const { data: items = [], isLoading, refetch } = useQuery({
         queryKey: ['items'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/reportitems');
+            const res = await fetch('https://second-shelf-server.vercel.app/reportitems');
             const data = await res.json();
             return data;
         }
@@ -24,7 +24,7 @@ const ReportedItems = () => {
 
     //delete reported item
     const handleItemDelete = item => {
-        fetch(`http://localhost:5000/reportitems/${item._id}`, {
+        fetch(`https://second-shelf-server.vercel.app/reportitems/${item._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

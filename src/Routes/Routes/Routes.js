@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:catName',
                 element: <PrivateRoute><Category></Category></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/bookscatgory/${params.catName}`)
+                loader: ({ params }) => fetch(`https://second-shelf-server.vercel.app/bookscatgory/${params.catName}`)
 
             }
         ]
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/bookeditems/${params.id}`)
+                loader: ({params}) => fetch(`https://second-shelf-server.vercel.app/bookeditems/${params.id}`)
             },
 
         ]

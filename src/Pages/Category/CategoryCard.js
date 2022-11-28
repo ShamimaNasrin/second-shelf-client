@@ -31,7 +31,7 @@ const CategoryCard = ({ book, setABook }) => {
         console.log(reportData);
 
         //send report item data to server
-        fetch('http://localhost:5000/report', {
+        fetch('https://second-shelf-server.vercel.app/report', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

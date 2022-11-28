@@ -15,7 +15,7 @@ const MyProducts = () => {
         queryFn: async () => {
 
             try {
-                const res = await fetch(`http://localhost:5000/books?email=${user?.email}`, {
+                const res = await fetch(`https://second-shelf-server.vercel.app/books?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
@@ -34,7 +34,7 @@ const MyProducts = () => {
     //Advertise a Book
     const handleAdvertise = id => {
         //console.log(id);
-        fetch(`http://localhost:5000/books/advertise/${id}`, {
+        fetch(`https://second-shelf-server.vercel.app/books/advertise/${id}`, {
             method: 'PUT',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -58,7 +58,7 @@ const MyProducts = () => {
 
     //delete book
     const handleBookDelete = book => {
-        fetch(`http://localhost:5000/books/${book._id}`, {
+        fetch(`https://second-shelf-server.vercel.app/books/${book._id}`, {
             method: 'DELETE',
             headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`

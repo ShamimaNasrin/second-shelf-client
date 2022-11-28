@@ -51,7 +51,7 @@ const AddProduct = () => {
 
                     console.log(Book);
 
-                    fetch('http://localhost:5000/books', {
+                    fetch('https://second-shelf-server.vercel.app/books', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

@@ -9,7 +9,7 @@ const Advertise = () => {
     const { data: advertisedbooks = [], isLoading } = useQuery({
         queryKey: ['advertisedbooks'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/books/advertised');
+            const res = await fetch('https://second-shelf-server.vercel.app/books/advertised');
             const data = await res.json();
             return data;
         }

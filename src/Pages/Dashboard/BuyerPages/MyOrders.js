@@ -15,7 +15,7 @@ const MyOrders = () => {
         queryFn: async () => {
 
             try {
-                const res = await fetch(`http://localhost:5000/bookeditems?email=${user?.email}`, {
+                const res = await fetch(`https://second-shelf-server.vercel.app/bookeditems?email=${user?.email}`, {
                     headers: {
                         authorization: `bearer ${localStorage.getItem('accessToken')}`
                     }
