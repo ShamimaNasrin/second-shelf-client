@@ -1,5 +1,5 @@
 # Second Shelf
-## Second Shelf is an full stack web based resell bookshop. 
+## Second Shelf is an full stack web based resell bookshop where you can buy and sell old books. 
 
 ## Live preview: https://second-shelf-bookstore.web.app/
 
